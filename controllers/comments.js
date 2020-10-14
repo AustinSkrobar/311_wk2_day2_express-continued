@@ -5,17 +5,18 @@ const list = (req, res) => {
 };
 
 const show = (req, res) => {
-  let commentId = parseInt(req.params.commentId);
-  let comment = comments.find((comment) => comment._id === commentId);
-
-  res.send(comment);
+  res.json(comments.find((comment) => comment._id == req.params.id))
 };
 
 const create = (req, res) => {
-  let comment = req.body;
-  comment._id = comments.length + 1;
+  let payload = req.body;
+  payload._id = 1;
 
-  comments.push(comment);
+  comments.map(item => {
+    item._id += 1
+  })
+
+  comments.push(payload);
 
   res.send(comments);
 };

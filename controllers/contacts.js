@@ -5,17 +5,18 @@ const list = (req, res) => {
 };
 
 const show = (req, res) => {
-  let contactId = parseInt(req.params.contactId);
-  let contact = contacts.find((contact) => contact._id === contactId);
-
-  res.send(contact);
+  
+  res.json(contacts.find((contact) => contact._id == req.params.id))
 };
 
 const create = (req, res) => {
-  let contact = req.body;
-  contact._id = contacts.length + 1;
+  let payload = req.body;
+  payload._id = 1;
 
-  contacts.push(contact);
+  contacts.map(item => {
+    item._id += 1
+  })
+  contacts.push(payload);
 
   res.send(contacts);
 };

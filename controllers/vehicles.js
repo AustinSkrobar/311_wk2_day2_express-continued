@@ -5,17 +5,18 @@ const list = (req, res) => {
 };
 
 const show = (req, res) => {
-  let vehicleId = parseInt(req.params.vehicleId);
-  let vehicle = vehicles.find((vehicle) => vehicle._id === vehicleId);
-
-  res.send(vehicle);
+  res.json(vehicles.find((vehicle) => vehicle._id == req.params.id))
 };
 
 const create = (req, res) => {
-  let vehicle = req.body;
-  vehicle._id = vehicles.length + 1;
+  let payload = req.body;
+  payload._id = 1;
 
-  vehicles.push(vehicle);
+  vehicles.map(item => {
+    item._id += 1
+  })
+
+  vehicles.push(payload);
 
   res.send(vehicles);
 };
